@@ -146,6 +146,7 @@ class BlockService {
   			return {
   				...block,
   				age: helper.convertToUTCDate(block.timestamp),
+  				blockReward: helper.getInflationByHeight(block.height),
   				harvester: {
   					signer: block.signer,
   					linkedAddress: supplementalPublicKeys.linked === Constants.Message.UNAVAILABLE ? block.signer : helper.publicKeyToAddress(supplementalPublicKeys.linked)

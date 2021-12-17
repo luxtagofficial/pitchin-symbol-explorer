@@ -137,6 +137,7 @@ export default {
 						getters.timeline.addLatestItem({
 							...latestBlock,
 							age: helper.convertToUTCDate(latestBlock.timestamp),
+							blockReward: helper.getInflationByHeight(latestBlock.height),
 							harvester: {
 								signer: latestBlock.signer,
 								linkedAddress: supplementalPublicKeys.linked === Constants.Message.UNAVAILABLE ? latestBlock.signer : helper.publicKeyToAddress(supplementalPublicKeys.linked)

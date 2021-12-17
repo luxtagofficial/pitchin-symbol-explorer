@@ -16,7 +16,7 @@
  *
  */
 
-import { Constants } from './config';
+import { Constants, inflation } from './config';
 import {
 	NetworkType,
 	MosaicId,
@@ -696,6 +696,15 @@ class helper {
 	 */
 	static getStartListIndex = (pageNumber, pageSize) => {
 		return pageNumber === 1 ? 0 : (pageNumber - 1) * pageSize;
+	}
+
+	static getInflationByHeight = (height) => {
+		const blocksHeight = Object.keys(inflation);
+
+		for (let i = 0; i < blocksHeight.length; i++) {
+			if (Number(blocksHeight[i]) >= height && height < Number(blocksHeight[i + 1]))
+				return helper.toNetworkCurrency(inflation[blocksHeight[i - 1]]);
+		}
 	}
 }
 
