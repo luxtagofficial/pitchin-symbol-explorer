@@ -410,5 +410,11 @@
     "first": "Первая",
     "last": "Последняя",
     "mosaicFlags": "Флаги",
-    "blockReward": "Награда за блок"
+    "blockReward": "Награда за блок",
+    "recent": "Недавние",
+    "viewAll": "Просмотр всех",
+    "recentMosaics": "Недавние Мозаики",
+    "recentNamespaces": "Недавние Пространства имен",
+    "lastEpoch": "Last Epoch",
+    "currentEpoch": "Current Epoch"
 }

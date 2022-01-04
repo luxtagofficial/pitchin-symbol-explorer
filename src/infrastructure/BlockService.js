@@ -248,7 +248,7 @@ class BlockService {
 
   	if (block.type === BlockType.ImportanceBlock) {
   		Object.assign(importanceBlockInfo, {
-  			totalVotingBalance: Number(block.totalVotingBalance),
+  			totalVotingBalance: helper.toNetworkCurrency(block.totalVotingBalance),
   			harvestingEligibleAccountsCount: Number(block.harvestingEligibleAccountsCount)
   		});
   	}
