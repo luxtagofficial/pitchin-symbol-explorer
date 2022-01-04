@@ -20,10 +20,12 @@ import Vue from 'vue';
 import Lock from './lock';
 import { filters, Constants } from '../config';
 import helper from '../helper';
+import { UInt64, ReceiptType } from 'symbol-sdk';
 import {
 	ListenerService,
 	BlockService,
-	AccountService
+	AccountService,
+	ReceiptService
 } from '../infrastructure';
 import {
 	DataSet,
@@ -130,14 +132,26 @@ export default {
 			if (getters.getSubscription === null) {
 				const subscription = await ListenerService.subscribeNewBlock(
 					async (item) => {
-						const latestBlock = await BlockService.getBlockByHeight(item.height.compact());
+						const blockHeight = Number(item.height.toString());
+
+						const [latestBlock, balanceTransferReceipt] = await Promise.all([
+							BlockService.getBlockByHeight(blockHeight),
+							ReceiptService.searchReceipts({
+								height: UInt64.fromUint(blockHeight),
+								receiptTypes: [ReceiptType.Inflation]
+							})
+						]);
 
 						const { supplementalPublicKeys } = await AccountService.getAccount(latestBlock.signer);
+
+						const inflationRate = balanceTransferReceipt.data.inflationStatement.data[0];
+
+						const blockReward = Number(inflationRate?.amount.toString()) || 0;
 
 						getters.timeline.addLatestItem({
 							...latestBlock,
 							age: helper.convertToUTCDate(latestBlock.timestamp),
-							blockReward: helper.getInflationByHeight(latestBlock.height),
+							blockReward: helper.toNetworkCurrency(blockReward),
 							harvester: {
 								signer: latestBlock.signer,
 								linkedAddress: supplementalPublicKeys.linked === Constants.Message.UNAVAILABLE ? latestBlock.signer : helper.publicKeyToAddress(supplementalPublicKeys.linked)
