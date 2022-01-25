@@ -252,33 +252,6 @@ class NodeService {
 
 		return helper.convertArrayToCSV(formattedData);
 	}
-
-	/**
-     * Gets node list from statistics service
-	 * @param filter (optional) 'preferred | suggested'
-	 * @param limit (optional) number of records
-	 * @param ssl (optional) return ssl ready node.
-     * @returns nodes
-     */
-	 static getNodeList = async (filter, limit, ssl) => {
-    	try {
-	 		return await http.statisticServiceRestClient().getNodes(filter, limit, ssl);
-    	}
-    	catch (e) {
-	 		throw Error('Statistics service getNodeHeightStats error: ', e);
-	 	}
-	 }
-
-	 /**
-     * Get API node list dataset into Vue Component
-     * @returns API Node list object for Vue component
-     */
-	 static getAPINodeList = async () => {
-	 	// get 30 ssl ready nodes from statistics service the list
-    	const nodes = await this.getNodeList('suggested', 30, true);
-
-	 	return nodes.map(nodeInfo => this.formatNodeInfo(nodeInfo)).sort((a, b) => a.friendlyName.localeCompare(b.friendlyName));
-	 }
 }
 
 export default NodeService;

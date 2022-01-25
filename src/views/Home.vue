@@ -65,22 +65,22 @@ export default {
 
 	data() {
 		return {
-			recentListWidgetSetup: [
-				{
-					title: 'recentNamespaces',
-					viewMoreLinkURL: '/namespaces',
-					dataGetter: 'namespace/getRecentList',
-					headerField: 'namespaceName',
-					fields: ['approximateExpired', 'ownerAddress']
-				},
-				{
-					title: 'recentMosaics',
-					viewMoreLinkURL: '/mosaics',
-					dataGetter: 'mosaic/getRecentList',
-					headerField: 'mosaicId',
-					fields: ['relativeAmount', 'ownerAddress']
-				}
-			]
+			// recentListWidgetSetup: [
+			// 	{
+			// 		title: 'recentNamespaces',
+			// 		viewMoreLinkURL: '/namespaces',
+			// 		dataGetter: 'namespace/getRecentList',
+			// 		headerField: 'namespaceName',
+			// 		fields: ['approximateExpired', 'ownerAddress']
+			// 	},
+			// 	{
+			// 		title: 'recentMosaics',
+			// 		viewMoreLinkURL: '/mosaics',
+			// 		dataGetter: 'mosaic/getRecentList',
+			// 		headerField: 'mosaicId',
+			// 		fields: ['relativeAmount', 'ownerAddress']
+			// 	}
+			// ]
 		};
 	},
 

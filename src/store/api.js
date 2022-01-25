@@ -32,9 +32,10 @@ export default {
 	state: {
 		// If the global state has been initialized.
 		initialized: false,
-		nodes: [],
-		currentNode: localStorage.getItem('currentNode') ? helper.parseUrl(localStorage.getItem('currentNode')) : '',
-		wssEndpoint: localStorage.getItem('currentNode') |> helper.httpToWssUrl,
+		nodes: [...globalConfig.peersApi.nodes],
+		defaultNode: helper.parseUrl(globalConfig.peersApi.defaultNode),
+		currentNode: localStorage.getItem('currentNode') ? helper.parseUrl(localStorage.getItem('currentNode')) : helper.parseUrl(globalConfig.peersApi.defaultNode),
+		wssEndpoint: localStorage.getItem('currentNode') || globalConfig.peersApi.defaultNode |> helper.httpToWssUrl,
 		marketData: helper.parseUrl(globalConfig.endpoints.marketData),
 		networkType: 0,
 		appVersion: version || '0'
@@ -81,7 +82,7 @@ export default {
 	actions: {
 		async initialize({ commit, dispatch, getters }) {
 			const callback = async () => {
-				await dispatch('loadNodeList');
+				dispatch('filterHealthyNodes');
 
 				const nodeUrl = getters['currentNode'];
 				const marketDataUrl = getters['marketData'];
@@ -115,24 +116,25 @@ export default {
 		/**
 		 * get Nodes list for node selector
 		 */
-		async loadNodeList({ commit, getters }) {
-			let nodeUrls = [];
-			const nodes = await NodeService.getAPINodeList();
+		async filterHealthyNodes({ commit, getters }) {
+			let healthyNodes = [];
+			const nodes = getters['nodes'];
 
-			nodes.map((url) => {
-				let endpoint = helper.parseUrl(url.apiEndpoint).origin;
+			await Promise.all(nodes.map(async (url) => {
+				let endpoint = helper.parseUrl(url).origin;
 
-				nodeUrls.push(endpoint);
-			});
+				if (await NodeService.isNodeActive(endpoint))
+					healthyNodes.push(url);
+			}));
 
-			commit('setNodes', nodeUrls);
+			commit('setNodes', healthyNodes);
 
 			const currentNode = getters['currentNode'];
-
-			const randomIndex = Math.floor(Math.random() * nodeUrls.length);
+			const activeNodes = healthyNodes.map(nodes => nodes.origin);
+			// const randomIndex = Math.floor(Math.random() * nodeUrls.length);
 
 			// Reset the currentNode, if currentNode not longer in list.
-			nodeUrls.indexOf(currentNode) === -1 ? commit('currentNode', helper.parseUrl(nodeUrls[randomIndex])) : void 0;
+			activeNodes.indexOf(currentNode) === -1 ? commit('currentNode', healthyNodes[0]) : void 0;
 		}
 	}
 };

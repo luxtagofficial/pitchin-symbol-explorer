@@ -1,13 +1,21 @@
 {
+	"peersApi": {
+		"defaultNode": "https://rest.southeastasia.cloudapp.azure.com/",
+		"nodes": [
+			"https://rest.southeastasia.cloudapp.azure.com/",
+			"https://0-0-0-0-0-0-0-0-0-0.quantum-zero.com:3001",
+			"https://00.hippopotamus.symbolist.jp:3001"
+		]
+	},
 	"apiNodePort": 3001,
 	"endpoints": {
 		"marketData": "https://min-api.cryptocompare.com/",
 		"statisticsService": "https://symbol.services"
 	},
 	"networkConfig": {
-		"namespaceName": "symbol.xym",
-		"namespaceId": "E74B99BA41F4AFEE",
-		"divisibility": "6"
+		"namespaceName": "",
+		"namespaceId": "",
+		"divisibility": "0"
 	},
 	"footer": {
 		"link": [
