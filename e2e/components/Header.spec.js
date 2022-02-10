@@ -5,7 +5,7 @@ describe('Symbol Explorer Header should', () => {
 
     it('contain correct logo and title', () => {
         cy.get('.header-title')
-        .contains('Pitchin blockchain explorer')
+            .contains('pitchIN blockchain explorer')
 
         cy.get('.header-logo')
         .should('have.attr', 'src')

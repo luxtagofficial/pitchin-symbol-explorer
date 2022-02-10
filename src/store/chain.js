@@ -82,9 +82,10 @@ export default {
 			state.chainInfo.lastEpoch = lastEpoch;
 		},
 		setNodeStats: (state, nodeStats) => {
+			let nodes = [1, 0, 0, 0, 0, 0, 0];
 			state.nodeStats = {
 				...nodeStats,
-				total: Array.from(Array(8).keys()).reduce((acc, val) => acc + (nodeStats[val] || 0))
+				total: nodes.reduce((acc, val) => acc + val)
 			};
 		}
 	},

@@ -20,26 +20,15 @@
 	"footer": {
 		"link": [
 			{
-				"href": "https://github.com/symbol",
-				"text": "Github",
-				"icon": "IconGithub"
+				"href": "https://www.facebook.com/pitchIN.my/",
+				"text": "Facebook",
+				"icon": "IconFacebook"
 			},
 			{
-				"href": "https://discord.com/invite/xymcity",
-				"text": "Discord",
-				"icon": "IconDiscord"
-			},
-			{
-				"href": "https://twitter.com/NEMofficial",
+				"href": "https://twitter.com/pitchIN_my?s=20",
 				"text": "Twitter",
 				"icon": "IconTwitter"
-			},
-			{
-				"href": "https://testnet.symbol.tools/",
-				"text": "Faucet",
-				"icon": "IconHomeCurrencyUsd"
 			}
 		]
 	}
 }
-
