@@ -57,23 +57,22 @@ import IconFacebook from "vue-material-design-icons/Facebook.vue";
 import globalConfig from "../../config/globalConfig";
 
 export default {
-	components: {
-		SymbolCopyRight,
-		NodeSelector,
+  components: {
+    SymbolCopyRight,
+    NodeSelector,
 
-		IconNewspaper,
-		IconTwitter
-	},
-
-	computed: {
-		footerItems() {
-			if (this.$store.getters['api/isTestnet'])
-				return globalConfig.footer.link;
-
-			return globalConfig.footer.link.filter(item => item.text !== 'Faucet');
-		}
-	}
+    IconNewspaper,
+    IconTwitter,
     IconFacebook,
+  },
+
+  computed: {
+    footerItems() {
+      if (this.$store.getters["api/isTestnet"]) return globalConfig.footer.link;
+
+      return globalConfig.footer.link.filter((item) => item.text !== "Faucet");
+    },
+  },
 };
 </script>
 
