@@ -2,9 +2,7 @@
 	"peersApi": {
 		"defaultNode": "https://rest.southeastasia.cloudapp.azure.com/",
 		"nodes": [
-			"https://rest.southeastasia.cloudapp.azure.com/",
-			"https://0-0-0-0-0-0-0-0-0-0.quantum-zero.com:3001",
-			"https://00.hippopotamus.symbolist.jp:3001"
+			"https://rest.southeastasia.cloudapp.azure.com/"
 		]
 	},
 	"apiNodePort": 3001,
